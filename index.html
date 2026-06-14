@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Bridge</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="header-bar">
+    <button id="burgerBtn" type="button" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <h2>Project Bridge</h2>
+    <div class="header-spacer"></div>
+  </div>
+
+  <div id="sideMenu" class="side-menu" aria-hidden="true">
+    <button class="close-menu" type="button" onclick="toggleMenu()" aria-label="Close menu">×</button>
+    <div class="menu-top">
+      <div class="menu-item active-menu" onclick="switchWorkspace('forward')">Godot ➔ Text (Export)</div>
+    </div>
+    <div class="menu-footer">
+      <button class="reset-menu" type="button" onclick="resetApp()">Reset</button>
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section id="workspaceForward" class="workspace active">
+      <div class="panel upload-zone">
+        <span class="panel-title">1. Select Project Source</span>
+        <div class="upload-buttons">
+          <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder (F)</button>
+          <button type="button" onclick="document.getElementById('zipInput').click()">Select ZIP (Z)</button>
+        </div>
+        <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="setMode('F')">
+        <input type="file" id="zipInput" accept=".zip" hidden onchange="setMode('Z')">
+        <div id="selectedSource" class="selected-source">No source selected</div>
+      </div>
+
+      <details class="filter-dropdown panel">
+        <summary>Compiler Settings</summary>
+        <div class="dropdown-content">
+          <label><input type="checkbox" id="skipGodot" checked> Skip .godot/</label>
+          <label><input type="checkbox" id="skipAddons" checked> Skip addons/</label>
+          <label><input type="checkbox" id="incGd" checked> Include .gd</label>
+          <label><input type="checkbox" id="incTscn" checked> Include .tscn</label>
+          <label><input type="checkbox" id="incTres" checked> Include .tres</label>
+          <label class="accent-label"><input type="checkbox" id="incOther" checked> Include Configs</label>
+        </div>
+      </details>
+
+      <button class="action-btn" type="button" onclick="processForward()">Compile to Text</button>
+      <div class="status-feed" id="statusFeedForward"><div>Waiting for input...</div></div>
+
+      <div id="outputShell" class="output-shell panel">
+        <button id="outputToggle" type="button" class="output-toggle" onclick="toggleOutputView()" aria-label="Expand output">⤢</button>
+        <textarea id="outputBox" readonly></textarea>
+      </div>
+
+      <a id="downloadLinkForward" class="download-btn" style="display:none;"></a>
+    </section>
+  </main>
+</body>
+</html>

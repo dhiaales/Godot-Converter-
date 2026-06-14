@@ -1,0 +1,376 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --panel: #121212;
+  --panel-2: #16161a;
+  --line: #1e1e24;
+  --blue: #478cb5;
+  --pink: #ffb7c5;
+  --white: #ffffff;
+  --muted: #b6c2cc;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.header-bar {
+  background-color: var(--panel);
+  padding: 15px 20px;
+  border-bottom: 2px solid var(--blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 150;
+}
+
+#burgerBtn {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--white);
+  text-align: center;
+}
+
+.header-spacer {
+  width: 24px;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: var(--panel);
+  border-right: 2px solid var(--blue);
+  transition: left 0.3s ease;
+  z-index: 200;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.close-menu {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--pink);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.menu-top {
+  display: grid;
+  gap: 0;
+}
+
+.menu-item {
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--blue);
+  user-select: none;
+}
+
+.menu-item:hover,
+.menu-item.active-menu {
+  background-color: var(--line);
+  color: var(--white);
+}
+
+.menu-footer {
+  margin-top: auto;
+  padding: 16px 14px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.reset-menu {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--pink);
+  color: #0a0a0a;
+}
+
+.page-shell {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 20px 15px 40px;
+}
+
+.workspace {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.workspace.active {
+  display: flex;
+}
+
+.panel,
+.upload-zone,
+.search-bar,
+.filter-dropdown,
+.output-shell {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.upload-zone {
+  border: 1px solid var(--blue);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-title {
+  font-weight: bold;
+  color: var(--pink);
+  display: block;
+}
+
+.upload-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button,
+.download-btn,
+select,
+input[type="text"] {
+  font: inherit;
+}
+
+button {
+  border: none;
+}
+
+.upload-buttons button,
+.action-btn,
+.download-btn {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: bold;
+  transition: transform 0.08s ease, opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.upload-buttons button,
+.action-btn {
+  background: var(--blue);
+  color: #0a0a0a;
+}
+
+.upload-buttons button:hover,
+.action-btn:hover,
+.download-btn:hover,
+.reset-menu:hover {
+  opacity: 0.92;
+}
+
+.upload-buttons button:active,
+.action-btn:active,
+.download-btn:active,
+.reset-menu:active {
+  transform: translateY(1px);
+}
+
+.selected-source {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--blue);
+}
+
+.filter-dropdown {
+  overflow: hidden;
+  padding: 0;
+}
+
+.filter-dropdown summary {
+  cursor: pointer;
+  padding: 16px;
+  list-style: none;
+  font-weight: bold;
+  color: var(--pink);
+}
+
+.filter-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown-content {
+  display: grid;
+  gap: 10px;
+  padding: 0 16px 16px;
+  color: var(--white);
+}
+
+.dropdown-content label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+}
+
+.accent-label {
+  color: var(--pink) !important;
+  font-weight: bold;
+}
+
+.action-btn {
+  width: 100%;
+  border: 1px solid transparent;
+}
+
+.status-feed {
+  min-height: 72px;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #0d0d0d;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 13px;
+  display: grid;
+  gap: 6px;
+}
+
+.output-shell {
+  position: relative;
+  padding-top: 46px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.output-shell.expanded {
+  position: fixed;
+  inset: 12px;
+  z-index: 500;
+  margin: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border-color: var(--blue);
+}
+
+.output-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #0d0d0d;
+  color: var(--pink);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  line-height: 1;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.output-shell.expanded .output-toggle {
+  color: var(--blue);
+}
+
+textarea {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  background: #0d0d0d;
+  color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.output-shell textarea {
+  min-height: 260px;
+}
+
+.output-shell.expanded textarea {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  resize: none;
+}
+
+.download-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px 16px;
+}
+
+.file-input-styled {
+  color: var(--muted);
+  width: 100%;
+}
+
+label input[type="checkbox"] {
+  accent-color: var(--pink);
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 14px 10px 30px;
+  }
+
+  .upload-buttons {
+    flex-direction: column;
+  }
+
+  .upload-buttons button,
+  .action-btn,
+  .download-btn {
+    width: 100%;
+  }
+
+  .output-shell.expanded {
+    inset: 8px;
+  }
+}

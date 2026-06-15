@@ -50,7 +50,12 @@ h2 { margin: 0; font-size: 18px; color: var(--white); }
   display: flex; flex-direction: column; gap: 12px;
 }
 
-.panel-title { font-weight: bold; color: var(--pink); }
+.panel-title { font-weight: bold; color: var(--pink); text-align: center;}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
 
 button, .download-btn {
   font: inherit; border: none; cursor: pointer;
@@ -74,13 +79,12 @@ button:hover, .download-btn:hover { opacity: 0.92; }
 }
 
 .dropdown-content label { display: flex; align-items: center; gap: 10px; }
-.accent-label { color: var(--pink); font-weight: bold; }
-input[type="checkbox"] { accent-color: var(--pink); }
+input[type="checkbox"] { accent-color: var(--pink); width: 16px; height: 16px; }
 
 .status-feed {
   background: #0d0d0d; border: 1px solid var(--line);
   border-radius: 12px; padding: 12px; font-size: 13px;
-  min-height: 50px; max-height: 150px; overflow-y: auto;
+  min-height: 60px; max-height: 150px; overflow-y: auto;
 }
 
 textarea {
@@ -88,4 +92,4 @@ textarea {
   background: #0d0d0d; color: var(--white);
   border: 1px solid var(--line); border-radius: 12px;
   padding: 12px; font-family: monospace; font-size: 12px;
-  }
+}

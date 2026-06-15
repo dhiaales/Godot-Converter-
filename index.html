@@ -10,23 +10,25 @@
 </head>
 <body>
   <div class="header-bar">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
     <h2>Godot Converter</h2>
   </div>
 
+  <div id="sidebar" class="sidebar">
+    <a href="#" onclick="triggerFolder()">📁 Folder Import</a>
+    <a href="#" onclick="triggerZip()">📦 ZIP Import</a>
+    <hr>
+    <a href="#" onclick="resetApp()" class="reset-link">⟳ Reset Application</a>
+  </div>
+  <div id="overlay" onclick="toggleMenu()"></div>
+
   <main class="page-shell">
     <section class="workspace active">
-      <div class="panel upload-zone">
-        <span class="panel-title">1. Select Input Method</span>
-        <div class="button-group">
-          <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder</button>
-          <button type="button" onclick="document.getElementById('zipInput').click()">Upload ZIP</button>
-        </div>
-        <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
-        <input type="file" id="zipInput" accept=".zip, application/zip, application/x-zip-compressed, multipart/x-zip" hidden onchange="processZip()">
-      </div>
+      <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
+      <input type="file" id="zipInput" accept=".zip" hidden onchange="processZip()">
 
       <details class="filter-dropdown panel">
-        <summary>2. Compiler Settings</summary>
+        <summary>Compiler Settings</summary>
         <div class="dropdown-content">
           <label><input type="checkbox" id="skipGodot" checked> Skip .godot/</label>
           <label><input type="checkbox" id="skipAddons" checked> Skip addons/</label>
@@ -37,8 +39,8 @@
         </div>
       </details>
 
-      <div class="status-feed" id="statusFeed"><div>Waiting for files...</div></div>
-      <textarea id="outputBox" readonly placeholder="Your compiled text will appear here..."></textarea>
+      <div class="status-feed" id="statusFeed"><div>Select an option from the menu to start.</div></div>
+      <textarea id="outputBox" readonly placeholder="Output will appear here..."></textarea>
       <a id="downloadLink" class="download-btn" style="display:none;"></a>
     </section>
   </main>

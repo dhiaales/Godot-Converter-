@@ -3,36 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Bridge</title>
+  <title>Project Bridge - Lite</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
   <div class="header-bar">
-    <button id="burgerBtn" type="button" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-    <h2>Project Bridge</h2>
-    <div class="header-spacer"></div>
-  </div>
-
-  <div id="sideMenu" class="side-menu" aria-hidden="true">
-    <button class="close-menu" type="button" onclick="toggleMenu()" aria-label="Close menu">×</button>
-    <div class="menu-item" onclick="switchWorkspace('forward')">Godot ➔ Text (Export)</div>
-    <div class="menu-item" onclick="switchWorkspace('reverse')">Text ➔ Godot (Patch)</div>
-    <div class="menu-item" onclick="switchWorkspace('docs')" style="color: #ffb7c5;">Documentation</div>
+    <h2>Project Bridge (Folder Export Only)</h2>
   </div>
 
   <main class="page-shell">
-    <section id="workspaceForward" class="workspace active">
+    <section class="workspace active">
       <div class="panel upload-zone">
-        <span class="panel-title">1. Select Project Source</span>
-        <div class="upload-buttons">
-          <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder (F)</button>
-          <button type="button" onclick="document.getElementById('zipInput').click()">Select ZIP (Z)</button>
-        </div>
-        <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="setMode('F')">
-        <input type="file" id="zipInput" accept=".zip" hidden onchange="setMode('Z')">
-        <div id="selectedSource" class="selected-source">No source selected</div>
+        <span class="panel-title">Select Godot Project Folder</span>
+        <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder</button>
+        <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
       </div>
 
       <details class="filter-dropdown panel">
@@ -44,45 +29,13 @@
           <label><input type="checkbox" id="incTscn" checked> Include .tscn</label>
           <label><input type="checkbox" id="incTres" checked> Include .tres</label>
           <label><input type="checkbox" id="incOther" checked> Include Configs</label>
-          <label class="accent-label"><input type="checkbox" id="baseplateMode"> Generate Baseplate</label>
+          <label class="accent-label"><input type="checkbox" id="baseplateMode"> Generate Baseplate Only</label>
         </div>
       </details>
 
-      <button class="action-btn" type="button" onclick="processForward()">Compile to Text</button>
-      <div class="status-feed" id="statusFeedForward"><div>Waiting for input...</div></div>
-      <textarea id="outputBox" readonly></textarea>
-      <a id="downloadLinkForward" class="download-btn" style="display:none;"></a>
-    </section>
-
-    <section id="workspaceReverse" class="workspace">
-      <div class="panel upload-zone" style="border-color: #ffb7c5;">
-        <span class="panel-title" style="color: #478cb5;">1. Select Master ZIP (Base Game)</span>
-        <input type="file" id="masterZip" accept=".zip" class="file-input-styled">
-      </div>
-
-      <div class="panel upload-zone" style="border-color: #478cb5;">
-        <span class="panel-title">2. Select AI Patch (Text File)</span>
-        <input type="file" id="patchText" accept=".txt" class="file-input-styled">
-      </div>
-
-      <button class="action-btn reverse-action" type="button" onclick="processReverse()">Apply Patch & Compile ZIP</button>
-      <div class="status-feed" id="statusFeedReverse"><div>Waiting for master zip and patch...</div></div>
-      <a id="downloadLinkReverse" class="download-btn" style="display:none;"></a>
-    </section>
-
-    <section id="workspaceDocs" class="workspace">
-      <h3 class="docs-title">Bridge Documentation</h3>
-      <div class="search-bar panel">
-        <select id="docFilter" onchange="renderDocs()">
-          <option value="all">All Topics</option>
-          <option value="general">General App Info</option>
-          <option value="forward">Godot to Text (Export)</option>
-          <option value="reverse">Text to Godot (Patch)</option>
-          <option value="errors">Error Messages</option>
-        </select>
-        <input type="text" id="docSearch" placeholder="Search topics..." onkeyup="renderDocs()">
-      </div>
-      <div id="docsContainer" class="docs-list"></div>
+      <div class="status-feed" id="statusFeed"><div>Waiting for folder...</div></div>
+      <textarea id="outputBox" readonly placeholder="Your compiled text will appear here..."></textarea>
+      <a id="downloadLink" class="download-btn" style="display:none;"></a>
     </section>
   </main>
 </body>

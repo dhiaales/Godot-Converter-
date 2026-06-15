@@ -3,25 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Bridge - Lite</title>
+  <title>Godot Converter</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
   <div class="header-bar">
-    <h2>Project Bridge (Folder Export Only)</h2>
+    <h2>Godot Converter</h2>
   </div>
 
   <main class="page-shell">
     <section class="workspace active">
       <div class="panel upload-zone">
-        <span class="panel-title">Select Godot Project Folder</span>
-        <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder</button>
+        <span class="panel-title">1. Select Input Method</span>
+        <div class="button-group">
+          <button type="button" onclick="document.getElementById('folderInput').click()">Select Folder</button>
+          <button type="button" onclick="document.getElementById('zipInput').click()">Upload ZIP</button>
+        </div>
         <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
+        <input type="file" id="zipInput" accept=".zip, application/zip, application/x-zip-compressed, multipart/x-zip" hidden onchange="processZip()">
       </div>
 
       <details class="filter-dropdown panel">
-        <summary>Compiler Settings & Baseplate</summary>
+        <summary>2. Compiler Settings</summary>
         <div class="dropdown-content">
           <label><input type="checkbox" id="skipGodot" checked> Skip .godot/</label>
           <label><input type="checkbox" id="skipAddons" checked> Skip addons/</label>
@@ -29,11 +34,10 @@
           <label><input type="checkbox" id="incTscn" checked> Include .tscn</label>
           <label><input type="checkbox" id="incTres" checked> Include .tres</label>
           <label><input type="checkbox" id="incOther" checked> Include Configs</label>
-          <label class="accent-label"><input type="checkbox" id="baseplateMode"> Generate Baseplate Only</label>
         </div>
       </details>
 
-      <div class="status-feed" id="statusFeed"><div>Waiting for folder...</div></div>
+      <div class="status-feed" id="statusFeed"><div>Waiting for files...</div></div>
       <textarea id="outputBox" readonly placeholder="Your compiled text will appear here..."></textarea>
       <a id="downloadLink" class="download-btn" style="display:none;"></a>
     </section>

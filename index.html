@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Godot Converter</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
-  <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Godot Converter</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="script.js"></script>
 </head>
 <body>
-  <div class="header-bar">
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <h2>Godot Converter</h2>
-  </div>
-
-  <div id="sidebar" class="sidebar">
-    <a href="#" onclick="triggerFolder()">📁 Folder Import</a>
-    <a href="#" onclick="triggerZip()">📦 ZIP Import</a>
-    <hr>
-    <a href="#" onclick="resetApp()" class="reset-link">⟳ Reset Application</a>
-  </div>
-  <div id="overlay" onclick="toggleMenu()"></div>
-
-  <main class="page-shell">
-    <section class="workspace active">
-      <input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
-      <input type="file" id="zipInput" accept=".zip" hidden onchange="processZip()">
-
-      <details class="filter-dropdown panel">
-        <summary>Compiler Settings</summary>
-        <div class="dropdown-content">
-          <label><input type="checkbox" id="skipGodot" checked> Skip .godot/</label>
-          <label><input type="checkbox" id="skipAddons" checked> Skip addons/</label>
-          <label><input type="checkbox" id="incGd" checked> Include .gd</label>
-          <label><input type="checkbox" id="incTscn" checked> Include .tscn</label>
-          <label><input type="checkbox" id="incTres" checked> Include .tres</label>
-          <label><input type="checkbox" id="incOther" checked> Include Configs</label>
-        </div>
-      </details>
-
-      <div class="status-feed" id="statusFeed"><div>Select an option from the menu to start.</div></div>
-      <textarea id="outputBox" readonly placeholder="Output will appear here..."></textarea>
-      <a id="downloadLink" class="download-btn" style="display:none;"></a>
-    </section>
-  </main>
+<div class="header-bar">
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+<h2>Godot Converter</h2>
+</div>
+<div id="sidebar" class="sidebar">
+<a href="#" onclick="triggerFolder()">📁 Folder Import</a>
+<a href="#" onclick="triggerZip()">📦 ZIP Import</a>
+<hr>
+<a href="#" onclick="resetApp()" class="reset-link">⟳ Reset Application</a>
+</div>
+<div id="overlay" onclick="toggleMenu()"></div>
+<main class="page-shell">
+<section class="workspace active">
+<input type="file" id="folderInput" webkitdirectory directory multiple hidden onchange="processFolder()">
+<input type="file" id="zipInput" accept=".zip" hidden onchange="processZip()">
+<details class="filter-dropdown panel">
+<summary>Compiler Settings</summary>
+<div class="dropdown-content">
+<label><input type="checkbox" id="skipGodot" checked> Skip .godot/</label>
+<label><input type="checkbox" id="skipAddons" checked> Skip addons/</label>
+<label><input type="checkbox" id="incGd" checked> Include .gd</label>
+<label><input type="checkbox" id="incTscn" checked> Include .tscn</label>
+<label><input type="checkbox" id="incTres" checked> Include .tres</label>
+<label><input type="checkbox" id="incOther" checked> Include Configs</label>
+</div>
+</details>
+<div class="status-feed" id="statusFeed">Select an option from the menu to start.</div>
+<textarea id="outputBox" readonly placeholder="Output will appear here..."></textarea>
+<a id="downloadLink" class="download-btn" style="display:none;"></a>
+</section>
+</main>
 </body>
 </html>
